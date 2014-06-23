@@ -1,3 +1,7 @@
-200 	 http://virginiabeachwebdevelopment.com/portfolio 	  
-200 	 http://virginiabeachwebdevelopment.com/contact-us 	  
-200 	 http://virginiabeachwebdevelopment.com/links 	  
+404 	 http://studiocenter.com/index.aspx
+ 	  
+301 	 http://studiocenter.com/default.aspx
+ 	 http://studiocenter.com/ 
+200 	 http://studiocenter.com/camera/video-talent
+ 	  
+200 	 http://studiocenter.com/political 	  
