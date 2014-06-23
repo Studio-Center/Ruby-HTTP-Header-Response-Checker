@@ -23,14 +23,14 @@ class LinkCheck
         @@okcnt = 0
 
         # store redirects
-        @redirects = Array.new()
-        @responses = Array.new()
+        @redirects = Array.new
+        @responses = Array.new
     end
 
     def reset
         # store redirects
-        @redirects = Array.new()
-        @responses = Array.new()
+        @redirects = Array.new
+        @responses = Array.new
     end
 
     # set class variable accessors
@@ -114,7 +114,7 @@ class ParseFile
         # open link list
         f = File.new(@filename,'r')
         # init link check class
-        chklnk = LinkCheck.new();
+        chklnk = LinkCheck.new;
         # walk through link file
         while line = f.gets
 
