@@ -1,8 +1,8 @@
 # default constants
 # set results file
-SAVEFILE = "results.txt"
+SAVEFILE = "results.tsv"
 # set page list file name
-FILENAME = "pages.txt"
+FILENAME = "pages.csv"
 # set domain string for replacement
 REPLACE = "http://studiocenter.com/"
 # set new domain string
@@ -47,24 +47,31 @@ class LinkCheck
     # check link for results
     def fetch(uri, limit = 10)
 
-        uri = URI(uri)
+        begin
+          uri = URI(uri)
 
-        response = Net::HTTP.get_response(uri)
+          t1 = Time.now
+          response = Net::HTTP.get_response(uri)
+          t2 = Time.now
+          delta = t2 - t1
 
-        case response
-        when Net::HTTPSuccess then
-            @@okcnt += 1
-            response.code
-        when Net::HTTPRedirection then
-            @@redcnt += 1
-            location = response['location']
-            warn "#{uri} redirected to #{location}"
-            @redirects << location
-            @responses << response.code
-            fetch(location, limit - 1)
-        else
-            @@ntfcnt += 1
-            response.code
+          case response
+          when Net::HTTPSuccess then
+              @@okcnt += 1
+              {res: response.code, resTime: delta}
+          when Net::HTTPRedirection then
+              @@redcnt += 1
+              location = response['location']
+              warn "#{uri} redirected to #{location}"
+              @redirects << location
+              @responses << response.code
+              fetch(location, limit - 1)
+          else
+              @@ntfcnt += 1
+              {res: response.code, resTime: delta}
+          end
+        rescue
+          {res: 408, resTime: 0}
         end
 
     end

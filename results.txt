@@ -1,4 +1,0 @@
-301	http://studiocenter.com/index.aspx	https://studiocenter.com/index.aspx
-301,301	http://studiocenter.com/default.aspx	https://studiocenter.com/default.aspx,https://studiocenter.com/
-301	http://studiocenter.com/camera/video-talent	https://studiocenter.com/camera/video-talent
-301	http://studiocenter.com/political	https://studiocenter.com/political

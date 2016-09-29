@@ -49,7 +49,24 @@ class ParseFile
 
             # reset instance variables
             chklnk::reset
+
+            # clean up URL before submission
+            if newlink !=~ /^htt(p|ps):/
+              if newlink[0,1] == "/"
+                newlink = 'http:/' + newlink
+              elsif newlink[0,2] == "//"
+                newlink = 'http:' + newlink
+              else
+                newlink = 'http://' + newlink
+              end
+            end
+
+            # store link results
             results = chklnk::fetch(newlink)
+
+            # format results for presentation
+            resTime = results[:resTime]
+            results = results[:res]
 
             redirects = ''
             if chklnk.redirects.count > 0
@@ -61,7 +78,7 @@ class ParseFile
             end
 
             # write to output file
-            results = "#{response}\t#{newlink}\t#{redirects}\n"
+            results = "#{response}\t#{newlink}\t#{redirects}\t#{resTime}\n"
             fw.write(results)
 
         end
